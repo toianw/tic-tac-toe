@@ -1,0 +1,269 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: #607D8B;
+	font-family: sans-serif;
+  color: #CFD8DC;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.title {
+	color: #CFD8DC;
+	font-weight: normal;
+	text-shadow: 1px 1px 2px rgba(0,0,0,0.3)
+}
+
+.board-container {
+	width: 100vw;
+	height: 100vw;
+	max-width: 350px;
+	max-height: 350px;
+	padding: 20px;
+	box-shadow: 0 0 1px 0px rgba(0,0,0,0.5);
+  position: relative;
+}
+
+#board {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	flex-wrap: wrap;
+	position: relative;
+}
+
+.cell {
+    width: 33.33%;
+    height: 33.33%;
+/*    border: 2px solid #B0BEC5;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4em;
+    font-family: sans-serif;
+    color: #fff;
+/*    padding: 5%;*/
+}
+
+/*.cell:nth-child(-n+3),
+.cell:nth-child(n+7) {
+    border-top: none;
+    border-bottom: none;
+}
+
+.cell:nth-child(3n),
+.cell:nth-child(3n+1) {
+	border-left: none;	
+	border-right: none;
+}*/
+
+.symbol {
+    stroke: #fff;
+    stroke-width: 12;
+    stroke-linecap: round;
+    fill: transparent;
+    width: 50%;
+    height: 50%;	
+    stroke-opacity: 0;
+}
+
+.fade-in {
+	width: 100%;
+	height: 100%;
+	stroke-opacity: 1;
+	transition: all 0.3s;
+}
+
+
+.winning-line > svg {
+  stroke: #8bc34a;
+	stroke: #c77575;
+/*	animation: flashLine 0.5s;
+	animation-delay: 0.4s;
+	animation-iteration-count: 2;*/
+}
+
+@keyframes flashLine {
+  0%,	{ opacity: 1; }
+  50%   { opacity: 0; }
+  100% 	{ opacity: 1; }
+}
+
+.gridline:after {
+	content: '';
+	position: absolute;
+	background: #B0BEC5;
+	box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+
+}
+
+.gridline--top:after, 
+.gridline--bottom:after {
+    height: 2px;
+    left: 0;
+    right: 0;
+    margin: 0 50%;
+    top: 33.333%;
+}
+
+.gridline--bottom:after {
+	top: calc(66.6667% - 2px);
+}
+
+.gridline--left:after, 
+.gridline--right:after {
+    content: '';
+    width: 2px;
+    top: 0;
+    bottom: 0;
+    margin: 50% 0;
+    left: 33.333%;
+}
+
+.gridline--right:after {
+	left: calc(66.66667% - 2px);
+}
+
+.draw-grid .gridline:after {
+	 transition: margin 0.5s;
+  margin: 0;
+}
+
+#result {
+    position: absolute;
+	top: 0;
+	bottom: 0;
+    left: 0;
+    right: 0;
+    color: #ddd;
+    font-size: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    padding: 20px;
+}
+
+$winningLineColor: #70a039;
+
+#result .symbol {
+  stroke: $winningLineColor;
+  stroke-opacity:1;
+  width: 100%;
+  height: 100%;
+}
+
+.winning-icon {
+    width: 33.333%;
+    height: 33.333%;
+}
+
+.message {
+    margin: 1em;
+    opacity: 0;
+}
+
+#result.appear {
+  visibility: visible;
+}
+
+#result.appear .message {
+  transition: opacity 0.3s 1.7s;
+  opacity: 1;
+}
+
+#result.appear .winning-icon {
+  transition: all 0.6s 1.5s;
+  transform: scale(1.8);
+}
+
+.disappear {
+  transition: all 1s 1.5s;
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+.game-info {
+    display: flex;
+    width: 350px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.game-info--players {
+    padding: 10px 20px;
+    padding: 10px 20px;
+    color: #ddd;
+    font-size: 19px;
+    box-shadow: 0px 0px 1px 0 rgba(0,0,0,0.5);
+    width: 120px;
+    text-align: center;
+}
+
+.game-info--player {
+  margin-right: 40px;
+}
+
+.game-info--computer {
+  margin-left: 40px;
+}
+
+.btn {
+    background: transparent;
+    border: 1px solid #4a7082;
+    padding: 5px 10px;
+    font-size: 18px;
+    color: #F5F5F5;
+    box-shadow: 0 4px 5px rgba(0,0,0,.16);
+    transition: all 0.3s;
+}
+
+.btn:hover {
+  cursor: pointer;
+  background: #eee;
+  color: #4a7082;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
+}
+
+
+
+
+@for $y from 0 through 2 {
+  @for $x from 0 through 2 {
+    
+    $cell: 3 * $y + $x; 
+    $translateX: (($x - 1) * -100) + '%';
+    $translateY: (($y - 1) * -100) + '%';
+    .toCenter-#{$cell} {
+      animation: toCenter-#{$cell} 1.5s forwards;
+      z-index: 1;
+    }
+
+    @keyframes toCenter-#{$cell} {
+      10% {
+        stroke: $winningLineColor;
+        transform: translate(0, 0);
+      }
+      
+      60% {
+        stroke: $winningLineColor;
+        transform: translate(0, 0);
+      }
+      
+      100% {
+        stroke: $winningLineColor;
+        transform: translate(#{$translateX}, #{$translateY});
+      }
+    }
+  }
+}
+

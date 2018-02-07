@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Tic Tac Toe</title>
+<!-- 	<link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet"> -->
+<!-- <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet"> -->
+	<link rel="stylesheet" href="tic.css">		
+</head>
+<body>
+		<h1 class="title">Tic-tac-toe</h1>
+		<div class="board-container">
+			<div id="board">
+				<div class="cell"></div>
+				<div class="cell gridline gridline--top"></div>
+				<div class="cell"></div>
+				<div class="cell gridline gridline--bottom"></div>
+				<div class="cell"></div>
+				<div class="cell gridline gridline--left"></div>
+				<div class="cell"></div>
+				<div class="cell gridline gridline--right"></div>
+				<div class="cell"></div>
+			</div>
+			<div id="result">
+				<div class="message" id="winner"></div>
+				<div class="winning-icon">
+					<svg viewBox="0, 0, 100, 100" width="100" height="100" class="symbol">
+						<line x1="27" y1="27" x2="73" y2="73"/>
+						<line x1="73" y1="27" x2="27" y2="73"/>
+					</svg>
+				</div>
+				<div class="message" id="play-again">
+					<button class="btn" id="reset">Play again</button>
+				</div>
+			</div>
+		</div>
+		<div class="game-info">
+			<div class="game-info--players game-info--player">human</div>
+			<div class="game-info--players game-info--computer">computer</div>
+		</div>
+	<script src="tic.js"></script>
+</body>
+</html>
