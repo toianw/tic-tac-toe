@@ -29,16 +29,18 @@ drawGrid();
 // 	}
 // }
 
-// const human: {
+// const human = {
 // 	symbol: 'x',
 // 	movesPlayed: [],
 // 	turn: true
 // };
 
-// const computer: {
-// 	symbol: 'x',
+// const computer = {
+// 	symbol: 'o',
 // 	movesPlayed: [],
 // }
+
+//const firstMove = 'player';
 
 const human = 'x',
 	  computer = 'o',
